@@ -136,7 +136,7 @@ body{
     height: 10px;
     background: yellow;
     animation: fall 3s linear forwards;
-    border-radius:2px;
+    border-radius:50%;
 }
 @keyframes fall {
     to { transform: translateY(120vh) rotate(360deg); }
@@ -163,6 +163,7 @@ body{
     padding:10px;
     background:#fff0f5;
     border-radius:15px;
+    position:relative;
 }
 
 /* Gift boxes grid */
@@ -303,17 +304,55 @@ function startGame(){
         {emoji:"🌈", message:"Rang birangi zindagi 🌈"}
     ];
 
-    const grid=document.createElement("div");
+    const grid = document.createElement("div");
     grid.classList.add("grid");
     game.appendChild(grid);
 
-    emojis.forEach(item=>{
+    emojis.forEach(item => {
         const box = document.createElement("div");
         box.classList.add("gift");
         box.innerHTML = item.emoji;
-        box.onclick=()=>{
-            alert(item.message);
+
+        box.onclick = () => {
+            box.innerHTML = "";
+
+            // Pop message
+            const msg = document.createElement("div");
+            msg.style.position = "absolute";
+            msg.style.top = "50%";
+            msg.style.left = "50%";
+            msg.style.transform = "translate(-50%, -50%)";
+            msg.style.background = "#fff0f5";
+            msg.style.padding = "10px 15px";
+            msg.style.borderRadius = "10px";
+            msg.style.boxShadow = "0 5px 10px rgba(0,0,0,0.2)";
+            msg.style.color = "#333";
+            msg.style.fontSize = "16px";
+            msg.style.zIndex = "10";
+            msg.innerHTML = item.message;
+            box.appendChild(msg);
+
+            // Confetti in the box
+            for(let i=0;i<10;i++){
+                let conf = document.createElement("div");
+                conf.classList.add("confetti");
+                conf.style.width="6px";
+                conf.style.height="6px";
+                conf.style.background="hsl("+Math.random()*360+",100%,50%)";
+                conf.style.position="absolute";
+                conf.style.top="50%";
+                conf.style.left="50%";
+                conf.style.transform="translate(-50%,-50%)";
+                conf.style.borderRadius="50%";
+                conf.style.animation = `fall 1s linear forwards`;
+                box.appendChild(conf);
+                setTimeout(()=>conf.remove(),1000);
+            }
+
+            // Remove message after 2 seconds
+            setTimeout(()=>msg.remove(),2000);
         };
+
         grid.appendChild(box);
     });
 }
