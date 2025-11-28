@@ -8,8 +8,8 @@
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
 body {
   overflow-x:hidden;
-  /* UPDATED BACKGROUND IMAGE LINK HERE */
-  background: url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Birthday_party_decorations_with_balloons_and_confetti.jpg') no-repeat center center fixed;
+  /* Using the custom background link from the first code block */
+  background: url('https://i.imgur.com/8Q4p6u3.png') no-repeat center center fixed;
   background-size: cover;
   color: #333;
   text-align: center;
@@ -43,12 +43,12 @@ header {
 /* Slide 1: Cake */
 #cake-img {
   width: 100%;
-  max-width: 500px;
+  max-width: 500px; /* Max-width updated to 500px from second code for better sizing */
   display: block;
   margin: 20px auto 0 auto;
 }
 #countdown {
-  font-size: 50px;
+  font-size: 50px; /* Font size updated to 50px from second code */
   font-weight: bold;
   margin-top: 20px;
   color: #fff;
@@ -139,11 +139,9 @@ header {
   top: -10px;
   width: 10px;
   height: 10px;
-  border-radius: 2px;
+  background: yellow;
+  border-radius:50%;
   animation: fall 3s linear forwards;
-  /* NEW: Confetti image and appearance */
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4b/Confetti.png');
-  background-size: cover;
 }
 @keyframes fall {
   to { transform: translateY(120vh) rotate(360deg); }
@@ -177,7 +175,7 @@ header {
 
 <div class="slide active" id="slide1">
   <header>🎂 Make a Wish!</header>
-    <img id="cake-img" src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Red_Velvet_Drip_Cake.jpg" alt="Birthday Cake">
+  <img id="cake-img" src="https://i.imgur.com/rN9e8vj.png" alt="Birthday Cake">
   <div id="countdown">3</div>
   <button class="next-btn" id="next1">Next 🎉</button>
 </div>
@@ -222,7 +220,7 @@ function showSlide(id) {
   document.getElementById(id).classList.add('active');
 }
 
-// Slide 1: Countdown & confetti
+// Slide 1: Countdown & confetti (Using logic from the second code block)
 let count = 3;
 const countdownEl = document.getElementById('countdown');
 const next1 = document.getElementById('next1');
@@ -241,17 +239,18 @@ next1.onclick = () => showSlide('slide2');
 
 // Confetti function
 function startConfetti(){
-  for(let i=0; i<80; i++){
+  for(let i=0; i<80; i++){ // Increased confetti count slightly from original 60
     let conf = document.createElement("div");
     conf.classList.add("confetti");
     conf.style.left = Math.random()*100 + "vw";
+    conf.style.background = "hsl(" + Math.random()*360 + ",100%,50%)";
     conf.style.animationDuration = (Math.random()*2+2) + "s";
     document.body.appendChild(conf);
     setTimeout(()=>conf.remove(), 3000);
   }
 }
 
-// Slide 3: gift game
+// Slide 3: gift game (Using logic from the second code block)
 function initGame(){
   const game = document.getElementById("gameArea");
   const gifts = [
@@ -281,6 +280,10 @@ function initGame(){
       msg.textContent = item.message;
       box.appendChild(msg);
       opened++;
+      // If all gifts are opened, show the next button
+      if (opened === gifts.length) {
+        document.getElementById('next3').style.display='inline-block';
+      }
     };
     grid.appendChild(box);
   });
@@ -288,7 +291,8 @@ function initGame(){
 initGame();
 document.getElementById('next3').onclick = () => showSlide('slide4');
 
-// Slide 4: choice messages
+
+// Slide 4: choice messages (Using logic from the second code block)
 function showMessage(option){
   const msgDiv = document.getElementById('choiceMessage');
   msgDiv.style.display = 'inline-block';
