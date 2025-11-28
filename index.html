@@ -8,7 +8,7 @@
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
 body {
   overflow-x:hidden;
-  /* Using the custom background link from the first code block */
+  /* RESTORED BACKGROUND IMAGE LINK */
   background: url('https://i.imgur.com/8Q4p6u3.png') no-repeat center center fixed;
   background-size: cover;
   color: #333;
@@ -43,12 +43,12 @@ header {
 /* Slide 1: Cake */
 #cake-img {
   width: 100%;
-  max-width: 500px; /* Max-width updated to 500px from second code for better sizing */
+  max-width: 500px; 
   display: block;
   margin: 20px auto 0 auto;
 }
 #countdown {
-  font-size: 50px; /* Font size updated to 50px from second code */
+  font-size: 50px; 
   font-weight: bold;
   margin-top: 20px;
   color: #fff;
@@ -175,7 +175,7 @@ header {
 
 <div class="slide active" id="slide1">
   <header>🎂 Make a Wish!</header>
-  <img id="cake-img" src="https://i.imgur.com/rN9e8vj.png" alt="Birthday Cake">
+    <img id="cake-img" src="https://i.imgur.com/rN9e8vj.png" alt="Birthday Cake">
   <div id="countdown">3</div>
   <button class="next-btn" id="next1">Next 🎉</button>
 </div>
@@ -220,7 +220,7 @@ function showSlide(id) {
   document.getElementById(id).classList.add('active');
 }
 
-// Slide 1: Countdown & confetti (Using logic from the second code block)
+// Slide 1: Countdown & confetti
 let count = 3;
 const countdownEl = document.getElementById('countdown');
 const next1 = document.getElementById('next1');
@@ -239,7 +239,7 @@ next1.onclick = () => showSlide('slide2');
 
 // Confetti function
 function startConfetti(){
-  for(let i=0; i<80; i++){ // Increased confetti count slightly from original 60
+  for(let i=0; i<80; i++){
     let conf = document.createElement("div");
     conf.classList.add("confetti");
     conf.style.left = Math.random()*100 + "vw";
@@ -250,7 +250,7 @@ function startConfetti(){
   }
 }
 
-// Slide 3: gift game (Using logic from the second code block)
+// Slide 3: gift game
 function initGame(){
   const game = document.getElementById("gameArea");
   const gifts = [
@@ -291,8 +291,7 @@ function initGame(){
 initGame();
 document.getElementById('next3').onclick = () => showSlide('slide4');
 
-
-// Slide 4: choice messages (Using logic from the second code block)
+// Slide 4: choice messages
 function showMessage(option){
   const msgDiv = document.getElementById('choiceMessage');
   msgDiv.style.display = 'inline-block';
