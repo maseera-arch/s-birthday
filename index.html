@@ -5,258 +5,276 @@
 <title>Happy Birthday Soheb!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-* {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Poppins', sans-serif;
-}
-body {
-    overflow-x:hidden;
-    background: url('https://i.ibb.co/0nW6S1B/party-background.jpg') no-repeat center center fixed;
+  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
+  body {
+    overflow-x: hidden;
+    background: url('https://cdn.pixabay.com/photo/2021/11/24/23/29/birthday-6829188_1280.jpg') no-repeat center center fixed;
     background-size: cover;
-    color:#333;
-}
-.slide {
-    display:none;
+    color: #333;
+    text-align: center;
+  }
+  .slide {
+    display: none;
     width:100%;
-    height:100vh;
-    text-align:center;
-    padding-top:40px;
-}
-.slide.active {
-    display:block;
-}
-header {
-    font-size:2rem;
-    font-weight:bold;
-    margin-bottom:20px;
+    min-height:100vh;
+    padding-top: 40px;
+  }
+  .slide.active {
+    display: block;
+  }
+  header {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
     color:#222;
-}
-/* Cake styles */
-#cake-container {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    margin-top:50px;
-}
-.cake-tier {
-    width:250px;
-    border-radius:20px;
-    border:2px solid #ff69b4;
-    margin:0;
-    position:relative;
-}
-.tier1 { height:100px; background: #ffe4e1; }
-.tier2 { height:80px; background: #ffc0cb; }
-.tier3 { height:60px; background: #ffe4e1; }
-#candle {
-    font-size:50px;
-    position:absolute;
-    top:-50px;
-    left:50%;
-    transform:translateX(-50%);
-}
-/* Countdown */
-#countdown {
-    font-size:50px;
-    font-weight:bold;
-    margin-top:20px;
-}
-/* Letter message */
-#letter {
-    font-size:25px;
-    margin-top:20px;
-    background:#fff0f5;
-    display:inline-block;
-    padding:15px 20px;
-    border-radius:15px;
-    box-shadow:0 5px 10px rgba(0,0,0,0.2);
-}
-/* Game slide */
-#gameArea {
-    margin-top:20px;
-}
-.grid {
-    display:grid;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+  }
+  .next-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 18px;
+    background: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  /* Slide 1: cake */
+  #cake-img {
+    max-width: 80%;
+    width: 300px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+  }
+  #countdown {
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  }
+
+  /* Letter slide */
+  #letter {
+    font-size: 25px;
+    margin: 20px auto;
+    background: rgba(255, 240, 245, 0.9);
+    display: inline-block;
+    padding: 15px 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    color: #333;
+    line-height: 1.4;
+  }
+
+  /* Gift slide */
+  #gameArea {
+    margin-top: 20px;
+  }
+  .grid {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap:15px;
-    margin-top:15px;
-}
-.gift {
-    position:relative;
-    font-size:50px;
-    cursor:pointer;
+    gap: 15px;
+    justify-items: center;
+  }
+  .gift {
+    position: relative;
+    font-size: 50px;
+    width: 80px;
+    height: 80px;
+    background: #ffedf2;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transition: transform 0.3s;
-}
-.gift:hover { transform: scale(1.2); }
-.gift-msg {
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    background:#fff0f5;
-    color:#333;
-    padding:10px 15px;
-    border-radius:10px;
-    box-shadow:0 5px 10px rgba(0,0,0,0.2);
-    z-index:10;
-    font-size:16px;
-}
-/* Choice slide */
-#choiceSlide {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    margin-top:50px;
-}
-.choice-btn {
-    padding:15px 25px;
-    font-size:20px;
-    margin:15px;
-    border:none;
-    border-radius:15px;
-    cursor:pointer;
-    background:#ff69b4;
-    color:white;
-    font-weight:bold;
-    box-shadow:0 5px 10px rgba(0,0,0,0.2);
-    width:300px;
-    max-width:80%;
-    text-align:center;
-}
-/* Thank you slide */
-#thankyou {
-    font-size:28px;
-    color:#ff1493;
-    padding:20px;
-    border-radius:15px;
-    background:rgba(255,240,245,0.8);
-    display:inline-block;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
-#thankyou span {
-    font-size:50px;
-    display:block;
-    margin-top:15px;
-    animation:heartBeat 1s infinite alternate;
-}
-@keyframes heartBeat {
-    0%{transform:scale(1);}
-    100%{transform:scale(1.2);}
-}
+  }
+  .gift.opened {
+    background: #fff;
+    cursor: default;
+  }
+  .gift:hover { transform: scale(1.1); }
+  .gift-msg {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,240,245,0.95);
+    color: #333;
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin-top: 6px;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    font-size: 16px;
+  }
+
+  /* Choice slide */
+  #choiceSlide {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .choice-btn {
+    padding: 15px 25px;
+    font-size: 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background: #ff69b4;
+    color: white;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    width: 260px;
+    max-width: 80%;
+    text-align: center;
+  }
+
+  /* Thank you slide */
+  #thankyou {
+    font-size: 28px;
+    color: #ff1493;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255,240,245,0.9);
+    display: inline-block;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin-top: 60px;
+    line-height: 1.5;
+  }
+  #thankyou span {
+    font-size: 50px;
+    display: block;
+    margin-top: 15px;
+    animation: heartBeat 1s infinite alternate;
+  }
+  @keyframes heartBeat {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.2); }
+  }
 </style>
 </head>
 <body>
 
-<!-- Slide 1: Candle blowing -->
+<!-- Slide 1: Cake & Countdown -->
 <div class="slide active" id="slide1">
-    <header>🎂 Candle Time!</header>
-    <div id="cake-container">
-        <div class="cake-tier tier1"></div>
-        <div class="cake-tier tier2"></div>
-        <div class="cake-tier tier3"></div>
-        <div id="candle">🕯️</div>
-    </div>
-    <div id="countdown">3</div>
+  <header>🎂 Make a Wish!</header>
+  <!-- Realistic cake image -->
+  <img id="cake-img" src="https://images.unsplash.com/photo-1551022379-644d7cca6385?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc0Njd8MHwxfHNlYXJjaHwxfHxiaXJ0aGRheSUyMGNhc2t8ZW58MHx8fHwxNjI0Mjg4MzIz&ixlib=rb-1.2.1&q=80&w=400" alt="Birthday Cake">
+  <div id="countdown">3</div>
+  <button class="next-btn" id="next1" style="display:none;">Next 🎉</button>
 </div>
 
 <!-- Slide 2: Letter message -->
 <div class="slide" id="slide2">
-    <header>💌 Birthday Letter</header>
-    <div id="letter">Loading...</div>
+  <header>💌 Birthday Letter</header>
+  <div id="letter">
+    Dear Soheb,<br>
+    ✨ Happy Birthday! ✨<br>
+    May your life be colorful, joyful, and full of surprises! 💖
+  </div>
+  <button class="next-btn" onclick="showSlide('slide3')">Next 🎁</button>
 </div>
 
 <!-- Slide 3: Gift game -->
 <div class="slide" id="slide3">
-    <header>🎁 Click the Gifts!</header>
-    <div id="gameArea"></div>
+  <header>🎁 Click the Gifts!</header>
+  <div id="gameArea"></div>
+  <button class="next-btn" id="next3" style="display:none;">Next ✨</button>
 </div>
 
-<!-- Slide 4: Choice -->
+<!-- Slide 4: Choice slide -->
 <div class="slide" id="slide4">
-    <header>✨ Choose an Option</header>
-    <div id="choiceSlide">
-        <button class="choice-btn" onclick="chooseOption('Ek to mai, I mean Maseera')">1: Ek to mai, I mean Maseera</button>
-        <button class="choice-btn" onclick="chooseOption('Fir se maich, Maseera')">2: Fir se maich, Maseera</button>
-    </div>
+  <header>✨ Choose an Option</header>
+  <div id="choiceSlide">
+    <button class="choice-btn" onclick="chooseOption('Ek to mai, I mean Maseera')">1: Ek to mai, I mean Maseera</button>
+    <button class="choice-btn" onclick="chooseOption('Fir se maich, Maseera')">2: Fir se maich, Maseera</button>
+  </div>
 </div>
 
 <!-- Slide 5: Thank you -->
 <div class="slide" id="slide5">
-    <header>💖 Thank You!</header>
-    <div id="thankyou">
-        Thanks for celebrating with us!<br>
-        <span>❤️</span>
-    </div>
+  <header>💖 Thank You!</header>
+  <div id="thankyou">
+    Thanks for celebrating with us!<br>
+    <span>❤️</span>
+  </div>
 </div>
 
 <script>
-// Slide management
-function showSlide(id) {
-    document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
+  function showSlide(id) {
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-}
+  }
 
-// Slide 1: Countdown and candle blow
-let count = 3;
-const countdownEl = document.getElementById('countdown');
-const candleEl = document.getElementById('candle');
-
-const timer = setInterval(()=>{
+  // Slide 1: countdown
+  let count = 3;
+  const countdownEl = document.getElementById('countdown');
+  const next1 = document.getElementById('next1');
+  let timer = setInterval(() => {
     countdownEl.textContent = count;
     count--;
-    if(count<0){
-        clearInterval(timer);
-        candleEl.textContent = "🕯️💨"; // blown candle
-        setTimeout(()=>{ showSlide('slide2'); showLetter(); }, 1000);
+    if (count < 0) {
+      clearInterval(timer);
+      countdownEl.textContent = '';
+      next1.style.display = 'inline-block';
     }
-},1000);
+  }, 1000);
 
-// Slide 2: Letter messages
-function showLetter(){
-    const letterEl = document.getElementById('letter');
-    letterEl.innerHTML = "💌 Dear Soheb,<br>✨ Happy Birthday! ✨<br>May your life be colorful, joyful, and full of surprises! 💖";
-    setTimeout(()=>{ showSlide('slide3'); initGame(); }, 3000);
-}
+  next1.onclick = () => showSlide('slide2');
 
-// Slide 3: Gift game
-function initGame(){
+  // Slide 3: gift game with "all gifts must open"
+  function initGame(){
     const game = document.getElementById("gameArea");
-    game.innerHTML = "";
     const gifts = [
-        {emoji:"🎁", message:"Mera Batman 🦸‍♂️"},
-        {emoji:"🎁", message:"Nalleee 😎"},
-        {emoji:"🎁", message:"Aaaaalooooooo 🍩"},
-        {emoji:"🎁", message:"Happy Birthday Pookie 🎉"},
-        {emoji:"🎁", message:"Heera hai Heeraa 💎"},
-        {emoji:"🎁", message:"Baccha? 🦄"},
-        {emoji:"🎁", message:"Lite lene ka sabko 🍕"},
-        {emoji:"🎁", message:"Sweet but Naughty 🍪"},
-        {emoji:"🎁", message:"Rang birangi zindagi 🌈"}
+      {emoji:"🎁", message:"Mera Batman 🦸‍♂️"},
+      {emoji:"🎁", message:"Nalleee 😎"},
+      {emoji:"🎁", message:"Aaaaalooooooo 🍩"},
+      {emoji:"🎁", message:"Happy Birthday Pookie 🎉"},
+      {emoji:"🎁", message:"Heera hai Heeraa 💎"},
+      {emoji:"🎁", message:"Baccha? 🦄"},
+      {emoji:"🎁", message:"Lite lene ka sabko 🍕"},
+      {emoji:"🎁", message:"Sweet but Naughty 🍪"},
+      {emoji:"🎁", message:"Rang birangi zindagi 🌈"}
     ];
-    const grid = document.createElement('div'); grid.classList.add('grid'); game.appendChild(grid);
+    const grid = document.createElement('div'); grid.classList.add('grid');
+    game.appendChild(grid);
 
-    gifts.forEach(item=>{
-        const box = document.createElement('div'); box.classList.add('gift'); box.textContent=item.emoji;
-        box.onclick = ()=>{
-            box.textContent="";
-            const msg = document.createElement('div'); msg.classList.add('gift-msg'); msg.textContent=item.message;
-            box.appendChild(msg);
-            setTimeout(()=>msg.remove(),2000);
-            setTimeout(()=>{ showSlide('slide4'); },2500); // after clicking gift go to choice slide
-        };
-        grid.appendChild(box);
+    let opened = 0;
+    gifts.forEach((item, idx) => {
+      const box = document.createElement('div');
+      box.classList.add('gift');
+      box.textContent = item.emoji;
+      box.onclick = () => {
+        if (box.classList.contains('opened')) return;
+        box.classList.add('opened');
+        const msg = document.createElement('div');
+        msg.classList.add('gift-msg');
+        msg.textContent = item.message;
+        box.appendChild(msg);
+        opened++;
+        if (opened === gifts.length) {
+          document.getElementById('next3').style.display = 'inline-block';
+        }
+      };
+      grid.appendChild(box);
     });
-}
+  }
 
-// Slide 4: Choice
-function chooseOption(text){
-    alert("You chose: " + text);
+  initGame();
+
+  // Choice slide
+  function chooseOption(text){
+    // optionally capture the choice text
     showSlide('slide5');
-}
+  }
 </script>
+
 </body>
 </html>
