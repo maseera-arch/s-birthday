@@ -9,7 +9,7 @@
 body {
   overflow-x:hidden;
   /* UPDATED BACKGROUND IMAGE LINK HERE */
-  background: url('https://images.unsplash.com/photo-1542662057-a1286ff0774a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Birthday_party_decorations_with_balloons_and_confetti.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #333;
   text-align: center;
@@ -139,9 +139,14 @@ header {
   top: -10px;
   width: 10px;
   height: 10px;
-  background: yellow;
+  background: yellow; /* This will be overridden by the image */
   border-radius:50%;
   animation: fall 3s linear forwards;
+  /* NEW: Confetti image */
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4b/Confetti.png');
+  background-size: cover;
+  /* To make it look more like actual confetti pieces, let's remove the border-radius if using a confetti image */
+  border-radius: 2px; /* Small squares/rectangles often look more like confetti */
 }
 @keyframes fall {
   to { transform: translateY(120vh) rotate(360deg); }
@@ -175,7 +180,7 @@ header {
 
 <div class="slide active" id="slide1">
   <header>🎂 Make a Wish!</header>
-    <img id="cake-img" src="https://images.unsplash.com/photo-1558963560-61b9a1a2b77e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Birthday Cake">
+    <img id="cake-img" src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Red_Velvet_Drip_Cake.jpg" alt="Birthday Cake">
   <div id="countdown">3</div>
   <button class="next-btn" id="next1">Next 🎉</button>
 </div>
@@ -243,7 +248,7 @@ function startConfetti(){
     let conf = document.createElement("div");
     conf.classList.add("confetti");
     conf.style.left = Math.random()*100 + "vw";
-    conf.style.background = "hsl(" + Math.random()*360 + ",100%,50%)";
+    /* The background property for confetti will now be set by CSS rules for .confetti class */
     conf.style.animationDuration = (Math.random()*2+2) + "s";
     document.body.appendChild(conf);
     setTimeout(()=>conf.remove(), 3000);
