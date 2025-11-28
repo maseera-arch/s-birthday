@@ -2,310 +2,177 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Soheb!</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Presentation</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
-body {
-  overflow-x:hidden;
-  /* ADD YOUR BACKGROUND IMAGE LINK HERE */
-  background: url('https://media.istockphoto.com/id/1352660936/photo/3d-rendering-podium-with-gift-boxes.jpg?s=612x612&w=0&k=20&c=OwJK3g5TAy3MJtqqK2w3Ple5Qit-1EoOfy36ZNPBnrY=') 
-  no-repeat center center fixed;
-  background-size: cover;
-  color: #333;
-  text-align: center;
-}
-.slide { display: none; width:100%; min-height:100vh; padding-top:40px; position: relative; }
-.slide.active { display: block; }
-header {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color:#222;
-  text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
-}
-.next-btn {
-  margin-top: 20px;
-  padding: 12px 25px;
-  font-size: 18px;
-  background: #ff69b4;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: none;
-}
+    body {
+        /* UPDATED: Background image of a 3D Birthday party animation */
+        overflow-x:hidden;
+        background: url('https://i.imgur.com/8Q4p6u3.png') no-repeat center center fixed;
+        background-size: cover;
+        text-align: center;
+        color: #333;
+        font-family: Arial, sans-serif;
+    }
+    .slide {
+        display:none;
+        position:relative;
+        height:100vh;
+        padding:20px;
+        /* Kept the semi-transparent white background for readability over the busy background */
+        background:rgba(255,255,255,0.7); 
+    }
+    .active { display:block; }
 
-/* Slide 1: Cake */
-#cake-img {
-  width: 100%;
-  max-width: 500px;
-  display: block;
-  margin: 20px auto 0 auto;
-}
-#countdown {
-  font-size: 50px;
-  font-weight: bold;
-  margin-top: 20px;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-}
+    #cake-img {
+        width:100%;
+        max-width:400px;
+        margin:20px auto;
+        display:block;
+    }
 
-/* Letter slide */
-#letter {
-  font-size: 25px;
-  margin: 20px auto;
-  background: rgba(255, 240, 245, 0.9);
-  display: inline-block;
-  padding: 15px 20px;
-  border-radius: 15px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  color: #333;
-  line-height: 1.4;
-}
+    #countdown { font-size:40px; font-weight:bold; margin-top:20px; }
 
-/* Gift slide */
-#gameArea { margin-top: 20px; }
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; justify-items: center; }
-.gift {
-  position: relative;
-  font-size: 50px;
-  width: 80px; height: 80px;
-  background: #ffedf2;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: transform 0.3s;
-}
-.gift.opened { background: #fff; cursor: default; }
-.gift:hover { transform: scale(1.1); }
-.gift-msg {
-  position: absolute;
-  top: 100%; left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255,240,245,0.95);
-  color: #333;
-  padding: 6px 10px;
-  border-radius: 8px;
-  margin-top: 6px;
-  white-space: nowrap;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  font-size: 16px;
-}
+    .next-btn {
+        position:absolute;
+        bottom:20px;
+        left:50%;
+        transform:translateX(-50%);
+        padding:10px 20px;
+        background:#ff79c6;
+        color:white;
+        border-radius:10px;
+        font-size:18px;
+        border:none;
+        cursor:pointer;
+    }
 
-/* Choice slide */
-#choiceSlide {
-  margin-top: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-}
-.choice-btn {
-  padding: 20px;
-  font-size: 24px;
-  border: none;
-  border-radius: 15px;
-  cursor: pointer;
-  background: #ff69b4;
-  color: white;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  width: 200px;
-  max-width: 90%;
-  text-align: center;
-}
-.choice-msg {
-  font-size: 22px;
-  margin-top: 20px;
-  color: #222;
-  background: rgba(255,240,245,0.95);
-  display: inline-block;
-  padding: 10px 15px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
+    /* Gift boxes */
+    #gift-container { display:flex; justify-content:center; gap:20px; padding-top:40px; }
+    .gift { width:120px; height:120px; background:#ffb6c1; border-radius:10px; cursor:pointer; position:relative; }
+    .opened { background:#ffe4e1; }
+    .gift-msg {
+        position:absolute;
+        top:-40px;
+        left:50%;
+        transform:translateX(-50%);
+        background:white;
+        padding:5px 10px;
+        border-radius:5px;
+        font-size:14px;
+        box-shadow:0 0 5px rgba(0,0,0,0.2);
+    }
 
-/* Confetti */
-.confetti {
-  position: fixed;
-  top: -10px;
-  width: 10px;
-  height: 10px;
-  background: yellow;
-  border-radius:50%;
-  animation: fall 3s linear forwards;
-}
-@keyframes fall {
-  to { transform: translateY(120vh) rotate(360deg); }
-}
+    /* Confetti */
+    .confetti {
+        width:8px;
+        height:8px;
+        position:fixed;
+        top:-10px;
+        animation:fall 3s linear;
+    }
+    @keyframes fall {
+        to { transform:translateY(110vh) rotate(720deg); }
+    }
 
-/* Thank you slide */
-#thankyou {
-  font-size: 28px;
-  color: #ff1493;
-  padding: 20px;
-  border-radius: 15px;
-  background: rgba(255,240,245,0.9);
-  display: inline-block;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  margin-top: 60px;
-  line-height: 1.5;
-}
-#thankyou span {
-  font-size: 50px;
-  display: block;
-  margin-top: 15px;
-  animation: heartBeat 1s infinite alternate;
-}
-@keyframes heartBeat {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.2); }
-}
+    /* Slide 4 options */
+    .choice-box { background:white; padding:15px; margin:20px; border-radius:10px; cursor:pointer; font-size:20px; }
+    .choice-text { margin-top:20px; font-size:18px; }
+
+    /* Thank you */
+    #thank { font-size:30px; margin-top:40px; }
 </style>
 </head>
 <body>
 
-<!-- Slide 1: Cake & Countdown -->
 <div class="slide active" id="slide1">
-  <header>🎂 Make a Wish!</header>
-  <!-- ADD YOUR CAKE IMAGE LINK HERE -->
-  <img id="cake-img" src="https://www.vecteezy.com/vector-art/70082309-birthday-cake-with-one-candle-lit-illustration-ideal-for-celebration-birthday-party-and-festive-themed-designs-requiring-cheerful-elements" alt="Birthday Cake">
-  <div id="countdown">3</div>
-  <button class="next-btn" id="next1">Next 🎉</button>
+    <h1>🎂 Happy Birthday! 🎂</h1>
+    <img id="cake-img" src="https://i.imgur.com/rN9e8vj.png" alt="Birthday Cake">
+    <div id="countdown">3</div>
+    <button class="next-btn" id="next1" style="display:none">&gt;&gt;</button>
 </div>
 
-<!-- Slide 2: Letter message -->
 <div class="slide" id="slide2">
-  <header>💌 Birthday Letter</header>
-  <div id="letter">
-    Dear Soheb,<br>
-    ✨ Happy Birthday! ✨<br>
-    May your life be colorful, joyful, and full of surprises! 💖
-  </div>
-  <button class="next-btn" onclick="showSlide('slide3')">Next 🎁</button>
+    <h2>💌 A Small Letter</h2>
+    <p>You mean a lot and today is your special day!</p>
+    <button class="next-btn" id="next2">&gt;&gt;</button>
 </div>
 
-<!-- Slide 3: Gift game -->
 <div class="slide" id="slide3">
-  <header>🎁 Click the Gifts!</header>
-  <div id="gameArea"></div>
-  <button class="next-btn" id="next3">Next ✨</button>
+    <h2>🎁 Open Your Gifts!</h2>
+    <div id="gift-container"></div>
+    <button class="next-btn" id="next3" style="display:none">&gt;&gt;</button>
 </div>
 
-<!-- Slide 4: Choice slide -->
 <div class="slide" id="slide4">
-  <header>✨ Choose an Option</header>
-  <div id="choiceSlide">
-    <button class="choice-btn" onclick="showMessage(1)">1</button>
-    <button class="choice-btn" onclick="showMessage(2)">2</button>
-    <div id="choiceMessage" class="choice-msg" style="display:none;"></div>
-    <button class="next-btn" id="next4" onclick="showSlide('slide5')">Next 🎉</button>
-  </div>
+    <h2>Choose an Option</h2>
+    <div class="choice-box" id="c1">1</div>
+    <div class="choice-box" id="c2">2</div>
+    <div class="choice-text" id="choiceText"></div>
+    <button class="next-btn" id="next4" style="display:none">&gt;&gt;</button>
 </div>
 
-<!-- Slide 5: Thank you -->
 <div class="slide" id="slide5">
-  <header>💖 Thank You!</header>
-  <div id="thankyou">
-    Thanks for celebrating with us!<br>
-    <span>❤️</span>
-  </div>
+    <h1 id="thank">💖 Thank You! 💖</h1>
 </div>
 
 <script>
-function showSlide(id) {
-  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+let currentSlide = 1;
+function showSlide(n){
+    document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+    document.getElementById('slide'+n).classList.add('active');
 }
 
-// Slide 1: Countdown & confetti
-let count = 3;
-const countdownEl = document.getElementById('countdown');
-const next1 = document.getElementById('next1');
-next1.style.display='none';
-let timer = setInterval(() => {
-  countdownEl.textContent = count;
-  count--;
-  if (count < 0) {
-    clearInterval(timer);
-    countdownEl.textContent = '';
-    startConfetti(); // confetti on candle blow
-    next1.style.display='inline-block';
-  }
-}, 1000);
-next1.onclick = () => showSlide('slide2');
+document.getElementById('next1').onclick=()=>showSlide(2);
+document.getElementById('next2').onclick=()=>showSlide(3);
+document.getElementById('next3').onclick=()=>showSlide(4);
+document.getElementById('next4').onclick=()=>showSlide(5);
 
-// Confetti function
+// COUNTDOWN
+let c=3;
+let cd=document.getElementById('countdown');
+let t=setInterval(()=>{
+    c--; cd.innerText=c;
+    if(c<0){ clearInterval(t); cd.innerText=""; startConfetti(); document.getElementById('next1').style.display='block'; }
+},1000);
+
+// CONFETTI FUNCTION
 function startConfetti(){
-  for(let i=0; i<80; i++){
-    let conf = document.createElement("div");
-    conf.classList.add("confetti");
-    conf.style.left = Math.random()*100 + "vw";
-    conf.style.background = "hsl(" + Math.random()*360 + ",100%,50%)";
-    conf.style.animationDuration = (Math.random()*2+2) + "s";
-    document.body.appendChild(conf);
-    setTimeout(()=>conf.remove(), 3000);
-  }
+    for(let i=0;i<60;i++){
+        let conf=document.createElement('div');
+        conf.classList.add('confetti');
+        conf.style.left=Math.random()*100+'vw';
+        conf.style.background=`hsl(${Math.random()*360},100%,50%)`;
+        document.body.appendChild(conf);
+        setTimeout(()=>conf.remove(),3000);
+    }
 }
 
-// Slide 3: gift game
-function initGame(){
-  const game = document.getElementById("gameArea");
-  const gifts = [
-    {emoji:"🎁", message:"Mera Batman 🦸‍♂️"},
-    {emoji:"🎁", message:"Nalleee 😎"},
-    {emoji:"🎁", message:"Aaaaalooooooo 🍩"},
-    {emoji:"🎁", message:"Happy Birthday Pookie 🎉"},
-    {emoji:"🎁", message:"Heera hai Heeraa 💎"},
-    {emoji:"🎁", message:"Baccha? 🦄"},
-    {emoji:"🎁", message:"Lite lene ka sabko 🍕"},
-    {emoji:"🎁", message:"Sweet but Naughty 🍪"},
-    {emoji:"🎁", message:"Rang birangi zindagi 🌈"}
-  ];
-  const grid = document.createElement('div'); grid.classList.add('grid');
-  game.appendChild(grid);
-
-  let opened = 0;
-  gifts.forEach((item) => {
-    const box = document.createElement('div');
+// GIFTS
+let gifts=[
+    {message:"Wishing you joy!"},
+    {message:"Stay blessed!"},
+    {message:"Have a wonderful year!"}
+];
+let gc=document.getElementById('gift-container');
+gifts.forEach((g,i)=>{
+    let box=document.createElement('div');
     box.classList.add('gift');
-    box.textContent = item.emoji;
-    box.onclick = () => {
-      if (box.classList.contains('opened')) return;
-      box.classList.add('opened');
-      const msg = document.createElement('div');
-      msg.classList.add('gift-msg');
-      msg.textContent = item.message;
-      box.appendChild(msg);
-      opened++;
+    box.onclick=()=>{
+        if(box.classList.contains('opened')) return;
+        box.classList.add('opened');
+        let msg=document.createElement('div');
+        msg.classList.add('gift-msg');
+        msg.innerText=g.message;
+        box.appendChild(msg);
+        if(document.querySelectorAll('.opened').length===gifts.length){ document.getElementById('next3').style.display='block'; }
     };
-    grid.appendChild(box);
-  });
-}
-initGame();
-document.getElementById('next3').onclick = () => showSlide('slide4');
+    gc.appendChild(box);
+});
 
-// Slide 4: choice messages
-function showMessage(option){
-  const msgDiv = document.getElementById('choiceMessage');
-  msgDiv.style.display = 'inline-block';
-  if(option===1){
-    msgDiv.textContent = "Ek to mai, I mean Maseera 💖";
-  } else {
-    msgDiv.textContent = "Fir se maich, Maseera 🎉";
-  }
-  document.getElementById('next4').style.display = 'inline-block';
-}
+// OPTIONS
+let ct=document.getElementById('choiceText');
+document.getElementById('c1').onclick=()=>{ ct.innerText="Ek to mai… I mean Maseera"; document.getElementById('next4').style.display='block'; };
+document.getElementById('c2').onclick=()=>{ ct.innerText="Fir se mai hi… Maseera!"; document.getElementById('next4').style.display='block'; };
 </script>
 </body>
 </html>
-
