@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday Soheb!</title>
+    <style>
+        body {
+            background: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #countdown {
+            font-size: 60px;
+            margin-top: 150px;
+        }
+        #message, #candle, #game {
+            display: none;
+            margin-top: 50px;
+        }
+        #candle {
+            font-size: 80px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background: gold;
+            border: none;
+            color: black;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="countdown"></div>
+
+<div id="candle">🕯️</div>
+
+<div id="message">
+    <h1>🎉 Happy Birthday <span id="name"></span>! 🎉</h1>
+    <p>Wishing you endless happiness, good health, success, and lots of smiles, Nalle! 💛</p>
+    <p>May this year bring everything you dream of ✨</p>
+    <p>I hope this year, your knees get healthy✨</p>
+    <button class="btn" onclick="startGame()">Play Mini Game 🎈</button>
+</div>
+
+<div id="game"></div>
+
+<script>
+let count = 3;
+let countdownDiv = document.getElementById("countdown");
+
+let x = setInterval(() => {
+    countdownDiv.innerHTML = count;
+    count--;
+    if (count < 0) {
+        clearInterval(x);
+        countdownDiv.style.display = "none";
+        document.getElementById("candle").style.display = "block";
+        setTimeout(() => {
+            document.getElementById("candle").style.display = "none";
+            document.getElementById("name").innerHTML = "Soheb";
+            document.getElementById("message").style.display = "block";
+        }, 2000);
+    }
+}, 1000);
+
+function startGame() {
+    let gameDiv = document.getElementById("game");
+    gameDiv.style.display = "block";
+    gameDiv.innerHTML = "<h2>Pop the Balloons 🎈</h2>";
+    for (let i = 0; i < 10; i++) {
+        let balloon = document.createElement("div");
+        balloon.innerHTML = "🎈";
+        balloon.style.fontSize = "40px";
+        balloon.style.cursor = "pointer";
+        balloon.onclick = () => balloon.remove();
+        gameDiv.appendChild(balloon);
+    }
+}
+</script>
+
+</body>
+</html>
