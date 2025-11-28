@@ -4,357 +4,258 @@
 <meta charset="UTF-8">
 <title>Happy Birthday Soheb!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-*{
+* {
     margin:0;
     padding:0;
     box-sizing:border-box;
-}
-
-body{
     font-family: 'Poppins', sans-serif;
-    text-align:center;
+}
+body {
     overflow-x:hidden;
-    background: linear-gradient(135deg, #ffb6c1, #ffe4e1, #fff0f5, #ffc0cb);
-    background-size: 400% 400%;
-    animation: bgMove 10s infinite;
-    color:#fff;
+    background: url('https://i.ibb.co/0nW6S1B/party-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color:#333;
 }
-
-@keyframes bgMove {
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
-
-/* Balloons & Lights */
-#balloon-bg {
-    position: fixed;
+.slide {
+    display:none;
     width:100%;
-    height:100%;
-    z-index:-1;
-    overflow:hidden;
+    height:100vh;
+    text-align:center;
+    padding-top:40px;
 }
-
-.balloon{
-    position: absolute;
-    font-size: 50px;
-    animation: floatUp 10s linear infinite;
+.slide.active {
+    display:block;
 }
-
-@keyframes floatUp{
-    0%{transform: translateY(100vh);}
-    100%{transform: translateY(-20vh);}
+header {
+    font-size:2rem;
+    font-weight:bold;
+    margin-bottom:20px;
+    color:#222;
 }
-
-/* Fairy lights */
-#lights{
-    position: absolute;
-    width: 100%;
-    height: 50px;
-    top:0;
+/* Cake styles */
+#cake-container {
     display:flex;
-    justify-content: space-around;
-}
-.light{
-    width: 10px;
-    height: 10px;
-    border-radius:50%;
-    background: yellow;
-    animation: blink 1.5s infinite alternate;
-}
-@keyframes blink{
-    0%{opacity:0.2;}
-    100%{opacity:1;}
-}
-
-/* Cake */
-#cake{
-    margin: 50px auto 0;
-    display:flex;
-    flex-direction: column;
+    justify-content:center;
     align-items:center;
+    flex-direction:column;
+    margin-top:50px;
 }
-.tier{
-    width:80%;
-    max-width:300px;
-    margin:5px 0;
+.cake-tier {
+    width:250px;
     border-radius:20px;
     border:2px solid #ff69b4;
+    margin:0;
+    position:relative;
 }
-.tier1{
-    height:60px;
-    background:white;
-}
-.tier2{
-    height:50px;
-    background:pink;
-}
-.tier3{
-    height:40px;
-    background:white;
-}
-
-/* Candle */
-#candle{
+.tier1 { height:100px; background: #ffe4e1; }
+.tier2 { height:80px; background: #ffc0cb; }
+.tier3 { height:60px; background: #ffe4e1; }
+#candle {
     font-size:50px;
-    margin-top:-30px;
-    animation: flicker 0.2s infinite;
+    position:absolute;
+    top:-50px;
+    left:50%;
+    transform:translateX(-50%);
 }
-@keyframes flicker {
-    0%{opacity:0.8;}
-    50%{opacity:1;}
-    100%{opacity:0.7;}
-}
-
 /* Countdown */
-#countdown{
+#countdown {
     font-size:50px;
-    margin-top:20px;
     font-weight:bold;
-    display:none;
+    margin-top:20px;
 }
-
-/* Letter wishes */
-#message{
+/* Letter message */
+#letter {
     font-size:25px;
     margin-top:20px;
-    display:none;
-    color:#333;
     background:#fff0f5;
-    padding:15px;
+    display:inline-block;
+    padding:15px 20px;
     border-radius:15px;
     box-shadow:0 5px 10px rgba(0,0,0,0.2);
 }
-
-/* Confetti */
-.confetti {
-    position: fixed;
-    top: -10px;
-    width: 10px;
-    height: 10px;
-    background: yellow;
-    animation: fall 3s linear forwards;
-    border-radius:50%;
-}
-@keyframes fall {
-    to { transform: translateY(120vh) rotate(360deg); }
-}
-
-/* Game Button */
-#gameBtn{
-    display:none;
+/* Game slide */
+#gameArea {
     margin-top:20px;
-    padding:12px 25px;
-    font-size:18px;
-    background:#ff69b4;
-    color:white;
-    border:none;
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:bold;
 }
-
-/* Game area */
-#gameArea{
-    margin-top:20px;
-    display:none;
-    padding:10px;
-    background:#fff0f5;
-    border-radius:15px;
-    position:relative;
-}
-
-/* Gift boxes grid */
-.grid{
+.grid {
     display:grid;
     grid-template-columns: repeat(3, 1fr);
-    gap:10px;
+    gap:15px;
     margin-top:15px;
 }
-
-.gift{
+.gift {
     position:relative;
-    background:#ffcccc;
-    border-radius:12px;
-    padding:20px;
+    font-size:50px;
     cursor:pointer;
-    font-size:40px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
     transition: transform 0.3s;
 }
-.gift:hover{
-    transform: scale(1.2);
-}
-
-/* Bow on gift */
-.gift::after{
-    content:"🎀";
+.gift:hover { transform: scale(1.2); }
+.gift-msg {
     position:absolute;
-    top:-10px;
-    right:-10px;
-    font-size:24px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:#fff0f5;
+    color:#333;
+    padding:10px 15px;
+    border-radius:10px;
+    box-shadow:0 5px 10px rgba(0,0,0,0.2);
+    z-index:10;
+    font-size:16px;
+}
+/* Choice slide */
+#choiceSlide {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin-top:50px;
+}
+.choice-btn {
+    padding:15px 25px;
+    font-size:20px;
+    margin:15px;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    background:#ff69b4;
+    color:white;
+    font-weight:bold;
+    box-shadow:0 5px 10px rgba(0,0,0,0.2);
+    width:300px;
+    max-width:80%;
+    text-align:center;
+}
+/* Thank you slide */
+#thankyou {
+    font-size:28px;
+    color:#ff1493;
+    padding:20px;
+    border-radius:15px;
+    background:rgba(255,240,245,0.8);
+    display:inline-block;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+#thankyou span {
+    font-size:50px;
+    display:block;
+    margin-top:15px;
+    animation:heartBeat 1s infinite alternate;
+}
+@keyframes heartBeat {
+    0%{transform:scale(1);}
+    100%{transform:scale(1.2);}
 }
 </style>
 </head>
 <body>
 
-<div id="balloon-bg"></div>
-<div id="lights"></div>
-
-<!-- Cake -->
-<div id="cake">
-    <div class="tier tier1"></div>
-    <div class="tier tier2"></div>
-    <div class="tier tier3"></div>
+<!-- Slide 1: Candle blowing -->
+<div class="slide active" id="slide1">
+    <header>🎂 Candle Time!</header>
+    <div id="cake-container">
+        <div class="cake-tier tier1"></div>
+        <div class="cake-tier tier2"></div>
+        <div class="cake-tier tier3"></div>
+        <div id="candle">🕯️</div>
+    </div>
+    <div id="countdown">3</div>
 </div>
-<div id="candle">🕯️</div>
 
-<!-- Countdown -->
-<div id="countdown">3</div>
+<!-- Slide 2: Letter message -->
+<div class="slide" id="slide2">
+    <header>💌 Birthday Letter</header>
+    <div id="letter">Loading...</div>
+</div>
 
-<!-- Letter message -->
-<div id="message"></div>
+<!-- Slide 3: Gift game -->
+<div class="slide" id="slide3">
+    <header>🎁 Click the Gifts!</header>
+    <div id="gameArea"></div>
+</div>
 
-<button id="gameBtn" onclick="startGame()">Play Birthday Game 🎮</button>
+<!-- Slide 4: Choice -->
+<div class="slide" id="slide4">
+    <header>✨ Choose an Option</header>
+    <div id="choiceSlide">
+        <button class="choice-btn" onclick="chooseOption('Ek to mai, I mean Maseera')">1: Ek to mai, I mean Maseera</button>
+        <button class="choice-btn" onclick="chooseOption('Fir se maich, Maseera')">2: Fir se maich, Maseera</button>
+    </div>
+</div>
 
-<div id="gameArea"></div>
+<!-- Slide 5: Thank you -->
+<div class="slide" id="slide5">
+    <header>💖 Thank You!</header>
+    <div id="thankyou">
+        Thanks for celebrating with us!<br>
+        <span>❤️</span>
+    </div>
+</div>
 
 <script>
-// Balloon generation
-function createBalloons(){
-    const colors = ["🎈","🎉","🎊","💖"];
-    for(let i=0;i<20;i++){
-        let b = document.createElement("div");
-        b.classList.add("balloon");
-        b.style.left=Math.random()*90+"%";
-        b.style.fontSize=(30+Math.random()*20)+"px";
-        b.innerHTML = colors[Math.floor(Math.random()*colors.length)];
-        b.style.animationDuration=(5+Math.random()*5)+"s";
-        document.getElementById("balloon-bg").appendChild(b);
-    }
+// Slide management
+function showSlide(id) {
+    document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
 }
 
-// Lights
-function createLights(){
-    const lightContainer = document.getElementById("lights");
-    for(let i=0;i<10;i++){
-        let l=document.createElement("div");
-        l.classList.add("light");
-        lightContainer.appendChild(l);
+// Slide 1: Countdown and candle blow
+let count = 3;
+const countdownEl = document.getElementById('countdown');
+const candleEl = document.getElementById('candle');
+
+const timer = setInterval(()=>{
+    countdownEl.textContent = count;
+    count--;
+    if(count<0){
+        clearInterval(timer);
+        candleEl.textContent = "🕯️💨"; // blown candle
+        setTimeout(()=>{ showSlide('slide2'); showLetter(); }, 1000);
     }
-}
-
-// Confetti
-function startConfetti(){
-    for(let i=0; i<80; i++){
-        let conf = document.createElement("div");
-        conf.classList.add("confetti");
-        conf.style.left = Math.random()*100 + "vw";
-        conf.style.background = "hsl(" + Math.random()*360 + ",100%,50%)";
-        conf.style.animationDuration = (Math.random()*2+2) + "s";
-        document.body.appendChild(conf);
-        setTimeout(()=>conf.remove(), 3000);
-    }
-}
-
-createBalloons();
-createLights();
-
-// Countdown and candle sequence
-setTimeout(()=>{
-    document.getElementById("countdown").style.display="block";
-    let count = 3;
-    let timer = setInterval(()=>{
-        document.getElementById("countdown").innerHTML = count;
-        count--;
-        if(count<0){
-            clearInterval(timer);
-            document.getElementById("candle").innerHTML="🕯️💨";
-            setTimeout(()=>{ document.getElementById("candle").style.opacity="0"; },500);
-            startConfetti();
-            setTimeout(()=>{
-                document.getElementById("message").innerHTML =
-                "💌 Dear Soheb,<br>✨ Happy Birthday! ✨<br>May your life be as fun and colorful as today! 💖";
-                document.getElementById("message").style.display="block";
-                document.getElementById("gameBtn").style.display="inline-block";
-            },800);
-        }
-    },1000);
 },1000);
 
-// GAME FUNCTION
-function startGame(){
+// Slide 2: Letter messages
+function showLetter(){
+    const letterEl = document.getElementById('letter');
+    letterEl.innerHTML = "💌 Dear Soheb,<br>✨ Happy Birthday! ✨<br>May your life be colorful, joyful, and full of surprises! 💖";
+    setTimeout(()=>{ showSlide('slide3'); initGame(); }, 3000);
+}
+
+// Slide 3: Gift game
+function initGame(){
     const game = document.getElementById("gameArea");
-    game.style.display="block";
-    game.innerHTML="<h2>🎁 Click the Gift Boxes for Fun Messages! 🎁</h2>";
-
-    const emojis = [
-        {emoji:"🦊", message:"Mera Batman 🦸‍♂️"},
-        {emoji:"🐱", message:"Nalleee 😎"},
-        {emoji:"🍩", message:"Aaaaalooooooo 🍩"},
-        {emoji:"🎀", message:"Happy Birthday Pookie 🎉"},
-        {emoji:"🌸", message:"Heera hai Heeraa 💎"},
-        {emoji:"🦄", message:"Baccha? 🦄"},
-        {emoji:"🍕", message:"Lite lene ka sabko 🍕"},
-        {emoji:"🍪", message:"Sweet but Naughty 🍪"},
-        {emoji:"🌈", message:"Rang birangi zindagi 🌈"}
+    game.innerHTML = "";
+    const gifts = [
+        {emoji:"🎁", message:"Mera Batman 🦸‍♂️"},
+        {emoji:"🎁", message:"Nalleee 😎"},
+        {emoji:"🎁", message:"Aaaaalooooooo 🍩"},
+        {emoji:"🎁", message:"Happy Birthday Pookie 🎉"},
+        {emoji:"🎁", message:"Heera hai Heeraa 💎"},
+        {emoji:"🎁", message:"Baccha? 🦄"},
+        {emoji:"🎁", message:"Lite lene ka sabko 🍕"},
+        {emoji:"🎁", message:"Sweet but Naughty 🍪"},
+        {emoji:"🎁", message:"Rang birangi zindagi 🌈"}
     ];
+    const grid = document.createElement('div'); grid.classList.add('grid'); game.appendChild(grid);
 
-    const grid = document.createElement("div");
-    grid.classList.add("grid");
-    game.appendChild(grid);
-
-    emojis.forEach(item => {
-        const box = document.createElement("div");
-        box.classList.add("gift");
-        box.innerHTML = item.emoji;
-
-        box.onclick = () => {
-            box.innerHTML = "";
-
-            // Pop message
-            const msg = document.createElement("div");
-            msg.style.position = "absolute";
-            msg.style.top = "50%";
-            msg.style.left = "50%";
-            msg.style.transform = "translate(-50%, -50%)";
-            msg.style.background = "#fff0f5";
-            msg.style.padding = "10px 15px";
-            msg.style.borderRadius = "10px";
-            msg.style.boxShadow = "0 5px 10px rgba(0,0,0,0.2)";
-            msg.style.color = "#333";
-            msg.style.fontSize = "16px";
-            msg.style.zIndex = "10";
-            msg.innerHTML = item.message;
+    gifts.forEach(item=>{
+        const box = document.createElement('div'); box.classList.add('gift'); box.textContent=item.emoji;
+        box.onclick = ()=>{
+            box.textContent="";
+            const msg = document.createElement('div'); msg.classList.add('gift-msg'); msg.textContent=item.message;
             box.appendChild(msg);
-
-            // Confetti in the box
-            for(let i=0;i<10;i++){
-                let conf = document.createElement("div");
-                conf.classList.add("confetti");
-                conf.style.width="6px";
-                conf.style.height="6px";
-                conf.style.background="hsl("+Math.random()*360+",100%,50%)";
-                conf.style.position="absolute";
-                conf.style.top="50%";
-                conf.style.left="50%";
-                conf.style.transform="translate(-50%,-50%)";
-                conf.style.borderRadius="50%";
-                conf.style.animation = `fall 1s linear forwards`;
-                box.appendChild(conf);
-                setTimeout(()=>conf.remove(),1000);
-            }
-
-            // Remove message after 2 seconds
             setTimeout(()=>msg.remove(),2000);
+            setTimeout(()=>{ showSlide('slide4'); },2500); // after clicking gift go to choice slide
         };
-
         grid.appendChild(box);
     });
+}
+
+// Slide 4: Choice
+function chooseOption(text){
+    alert("You chose: " + text);
+    showSlide('slide5');
 }
 </script>
 </body>
