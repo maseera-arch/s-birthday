@@ -139,14 +139,11 @@ header {
   top: -10px;
   width: 10px;
   height: 10px;
-  background: yellow; /* This will be overridden by the image */
-  border-radius:50%;
+  border-radius: 2px;
   animation: fall 3s linear forwards;
-  /* NEW: Confetti image */
+  /* NEW: Confetti image and appearance */
   background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4b/Confetti.png');
   background-size: cover;
-  /* To make it look more like actual confetti pieces, let's remove the border-radius if using a confetti image */
-  border-radius: 2px; /* Small squares/rectangles often look more like confetti */
 }
 @keyframes fall {
   to { transform: translateY(120vh) rotate(360deg); }
@@ -248,7 +245,6 @@ function startConfetti(){
     let conf = document.createElement("div");
     conf.classList.add("confetti");
     conf.style.left = Math.random()*100 + "vw";
-    /* The background property for confetti will now be set by CSS rules for .confetti class */
     conf.style.animationDuration = (Math.random()*2+2) + "s";
     document.body.appendChild(conf);
     setTimeout(()=>conf.remove(), 3000);
