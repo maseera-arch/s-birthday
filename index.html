@@ -2,329 +2,194 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Soheb!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Birthday Soheb</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
-body {
-  overflow-x:hidden;
-  /* Using a generic festive background since you want to manage balloons with an <img> tag */
-  background: url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Birthday_party_decorations_with_balloons_and_confetti.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #333;
-  text-align: center;
-}
-.slide { 
-    display: none; 
-    width:100%; 
-    min-height:100vh; 
-    padding-top:40px; 
-    position: relative; 
-    /* Added semi-transparent overlay to ensure text/images on slides pop over the busy background */
-    background: rgba(255, 255, 255, 0.7); 
-}
-.slide.active { display: block; }
-header {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color:#222;
-  text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
-}
-.next-btn {
-  margin-top: 20px;
-  padding: 12px 25px;
-  font-size: 18px;
-  background: #ff69b4;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: none;
-}
+body, html { margin:0; padding:0; font-family:'Comic Sans MS', cursive; overflow-x:hidden; }
 
-/* Slide 1: Cake */
-#cake-img {
-  width: 100%;
-  max-width: 500px; 
-  display: block;
-  margin: 20px auto 0 auto;
-}
-/* New style for the balloon container */
-#balloon-container {
-    margin-bottom: 20px;
-}
-#balloon-img {
-    width: 300px; /* As requested */
-    display: block;
-    margin: 0 auto;
-}
-#countdown {
-  font-size: 50px; 
-  font-weight: bold;
-  margin-top: 20px;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-}
+/* General Slide */
+.slide { display:none; width:100%; height:100vh; text-align:center; position:relative; padding-top:30px; overflow-y:auto; }
+.active { display:block; }
+.bold-text { font-weight:bold; padding:5px 10px; display:inline-block; border-radius:10px; }
 
-/* Letter slide */
-#letter {
-  font-size: 25px;
-  margin: 20px auto;
-  background: rgba(255, 240, 245, 0.9);
-  display: inline-block;
-  padding: 15px 20px;
-  border-radius: 15px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  color: #333;
-  line-height: 1.4;
-}
+/* Slide 1 */
+#slide1 { background: linear-gradient(135deg,#ffc0cb,#ffb6c1); }
+.makewish { font-size:3.8rem; font-weight:bold; color:#ff1493; margin-bottom:10px; text-shadow:2px 2px 5px #fff; }
+.sub-text { font-size:1.8rem; color:#880e4f; margin-bottom:20px; font-weight:bold; }
+.countdown { font-size:3.5rem; color:#d500f9; margin:10px; animation:blink 1s infinite; }
+@keyframes blink {0%,50%,100%{opacity:1}25%,75%{opacity:0}}
+.cake-container { margin-top:20px; position:relative; }
+.cake-emoji { font-size:16rem; }
+.flame { width:30px; height:35px; background:orange; border-radius:50%; position:absolute; top:-35px; left:50%; transform:translateX(-50%); animation:flicker 0.5s infinite alternate; }
+@keyframes flicker {0%{transform:translateX(-50%) scale(1);opacity:1;}100%{transform:translateX(-50%) scale(1.2);opacity:0.8;}}
+.happy-message { font-size:4rem; color:#ff1493; margin-top:20px; display:none; animation:pop 0.6s; }
+@keyframes pop {0%{transform:scale(0);}50%{transform:scale(1.2);}100%{transform:scale(1);}}
 
-/* Gift slide */
-#gameArea { margin-top: 20px; }
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; justify-items: center; }
-.gift {
-  position: relative;
-  font-size: 50px;
-  width: 80px; height: 80px;
-  background: #ffedf2;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: transform 0.3s;
-}
-.gift.opened { background: #fff; cursor: default; }
-.gift:hover { transform: scale(1.1); }
-.gift-msg {
-  position: absolute;
-  top: 100%; left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255,240,245,0.95);
-  color: #333;
-  padding: 6px 10px;
-  border-radius: 8px;
-  margin-top: 6px;
-  white-space: nowrap;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  font-size: 16px;
-}
+/* Slide 2 */
+#slide2 { background: linear-gradient(135deg,#ffd1dc,#ffb3c6); padding:20px; }
+.message-box { background:#ffffffcc; color:black; -webkit-text-stroke:1px white; padding:15px 20px; border-radius:20px; margin:12px auto; width:90%; font-size:1.7rem; text-align:left; font-weight:bold; box-shadow:0 0 15px rgba(0,0,0,0.2); }
 
-/* Choice slide */
-#choiceSlide {
-  margin-top: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-}
-.choice-btn {
-  padding: 20px;
-  font-size: 24px;
-  border: none;
-  border-radius: 15px;
-  cursor: pointer;
-  background: #ff69b4;
-  color: white;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  width: 200px;
-  max-width: 90%;
-  text-align: center;
-}
-.choice-msg {
-  font-size: 22px;
-  margin-top: 20px;
-  color: #222;
-  background: rgba(255,240,245,0.95);
-  display: inline-block;
-  padding: 10px 15px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
+/* Slide 3 - Memory Game */
+#slide3 { background: linear-gradient(135deg,#e6ccff,#f7d6f7); padding-top:30px; }
+.game-arena { background:#fcd1e0; border:5px solid #ff69b4; border-radius:20px; width:650px; height:auto; margin:20px auto; padding:25px; display:grid; grid-template-columns:repeat(4,140px); grid-gap:15px; justify-content:center; }
+.card { width:140px; height:140px; background:#ffe0e6; border-radius:20px; font-size:3rem; display:flex; justify-content:center; align-items:center; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition:transform 0.3s; }
+.card:hover { transform:scale(1.1); }
+.card.matched { background:#ff69b4; color:white; cursor:default; animation:pop 0.5s; }
 
-/* Confetti */
-.confetti {
-  position: fixed;
-  top: -10px;
-  width: 10px;
-  height: 10px;
-  background: yellow;
-  border-radius:50%;
-  animation: fall 3s linear forwards;
-}
-@keyframes fall {
-  to { transform: translateY(120vh) rotate(360deg); }
-}
+/* Slide 4 Options - Same theme as Slide 3 */
+#slide4 { background: linear-gradient(135deg,#e6ccff,#f7d6f7); }
+.options-slide { background:#fcd1e0; border-radius:25px; padding:40px; width:70%; margin:30px auto; box-shadow:0 0 15px #ff69b4; }
+.options-slide button { font-size:2rem; padding:20px 45px; margin:20px; border-radius:30px; border:none; background-color:#ff69b4; color:white; cursor:pointer; font-weight:bold; transition:transform 0.3s; }
+.options-slide button:hover { transform:scale(1.1); }
+#optionMessage { margin-top:25px; font-size:2rem; color:#880e4f; font-weight:bold; }
 
-/* Thank you slide */
-#thankyou {
-  font-size: 28px;
-  color: #ff1493;
-  padding: 20px;
-  border-radius: 15px;
-  background: rgba(255,240,245,0.9);
-  display: inline-block;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  margin-top: 60px;
-  line-height: 1.5;
-}
-#thankyou span {
-  font-size: 50px;
-  display: block;
-  margin-top: 15px;
-  animation: heartBeat 1s infinite alternate;
-}
-@keyframes heartBeat {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.2); }
-}
+/* Slide 5 Thank You */
+#slide5 { background: linear-gradient(135deg,#ffb6c1,#ff80ab); }
+.thankyou { font-size:3rem; font-weight:bold; color:white; text-shadow:2px 2px 0 black, 2px -2px 0 black, -2px 2px 0 black, -2px -2px 0 black; width:100%; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; animation:pop 0.6s; }
+
+/* Next Button */
+button.next-btn { margin-top:25px; font-size:2rem; padding:15px 40px; border:none; border-radius:30px; background:#ff4081; color:white; cursor:pointer; transition:transform 0.3s; }
+button.next-btn:hover { transform:scale(1.1); }
 </style>
 </head>
 <body>
 
+<!-- Slide 1 -->
 <div class="slide active" id="slide1">
-  <header>🎂 Make a Wish!</header>
-  
-    <div id="balloon-container">
-    <img src="balloon.jpg" width= "300">
-  </div>
-  
-  <img id="cake-img" src="https://i.imgur.com/rN9e8vj.png" alt="Birthday Cake">
-  <div id="countdown">3</div>
-  <button class="next-btn" id="next1">Next 🎉</button>
+    <div class="makewish bold-text">✨ Make a Wish ✨</div>
+    <div class="sub-text">Blow the candle and make your wish!</div>
+    <div class="countdown" id="countdown">3</div>
+    <div class="cake-container">
+        <div class="cake-emoji">🎂</div>
+        <div class="flame" id="flame"></div>
+    </div>
+    <div class="happy-message bold-text" id="happyMessage">🎉 Happy Birthday Soheb! 🎉</div>
+    <button class="next-btn" onclick="nextSlide()">Next ➡️</button>
 </div>
 
+<!-- Slide 2 -->
 <div class="slide" id="slide2">
-  <header>💌 Birthday Letter</header>
-  <div id="letter">
-    Dear Soheb,<br>
-    ✨ Happy Birthday! ✨<br>
-    May your life be colorful, joyful, and full of surprises! 💖
-  </div>
-  <button class="next-btn" onclick="showSlide('slide3')">Next 🎁</button>
+    <h2 class="bold-text" style="color:#880e4f; margin-bottom:20px;">💌 Birthday Wishes 💌</h2>
+    <div id="messagesContainer"></div>
+    <button class="next-btn" onclick="nextSlide()">Next ➡️</button>
 </div>
 
+<!-- Slide 3 -->
 <div class="slide" id="slide3">
-  <header>🎁 Click the Gifts!</header>
-  <div id="gameArea"></div>
-  <button class="next-btn" id="next3">Next ✨</button>
+    <h2 class="bold-text" style="color:#6a1b9a;">Match the Pairs! 🕹️</h2>
+    <div class="game-arena" id="gameArena"></div>
+    <div style="margin-top:10px;font-size:1.6rem;color:#880e4f;font-weight:bold" id="score"></div>
+    <button class="next-btn" onclick="nextSlide()">Next ➡️</button>
 </div>
 
+<!-- Slide 4 -->
 <div class="slide" id="slide4">
-  <header>✨ Choose an Option</header>
-  <div id="choiceSlide">
-    <button class="choice-btn" onclick="showMessage(1)">1</button>
-    <button class="choice-btn" onclick="showMessage(2)">2</button>
-    <div id="choiceMessage" class="choice-msg" style="display:none;"></div>
-    <button class="next-btn" id="next4" onclick="showSlide('slide5')">Next 🎉</button>
-  </div>
+    <h2 class="bold-text" style="color:#6a1b9a;">Choose an Option! 🎈</h2>
+    <div class="options-slide">
+        <button onclick="showOption('Ek Toh Main I mean Maseera 😎')">Option 1 🎉</button>
+        <button onclick="showOption('Phir Se Maich Maseera 😜')">Option 2 🎊</button>
+    </div>
+    <div id="optionMessage"></div>
+    <button class="next-btn" onclick="nextSlide()">Next ➡️</button>
 </div>
 
+<!-- Slide 5 -->
 <div class="slide" id="slide5">
-  <header>💖 Thank You!</header>
-  <div id="thankyou">
-    Thanks for celebrating with us!<br>
-    <span>❤️</span>
-  </div>
+    <div class="thankyou bold-text">
+        🎉 Thank You for Celebrating! 🎉<br>
+        Hope your day is colorful, fun & magical! 💖✨<br>
+        From your dearest friend, Massooooo
+    </div>
 </div>
 
 <script>
-function showSlide(id) {
-  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+// Slide Navigation
+let currentSlide=1;
+function nextSlide(){
+    document.getElementById('slide'+currentSlide).classList.remove('active');
+    currentSlide++;
+    if(currentSlide>5) currentSlide=5;
+    document.getElementById('slide'+currentSlide).classList.add('active');
 }
 
-// Slide 1: Countdown & confetti
-let count = 3;
-const countdownEl = document.getElementById('countdown');
-const next1 = document.getElementById('next1');
-next1.style.display='none';
-let timer = setInterval(() => {
-  countdownEl.textContent = count;
-  count--;
-  if (count < 0) {
-    clearInterval(timer);
-    countdownEl.textContent = '';
-    startConfetti(); // confetti on candle blow
-    next1.style.display='inline-block';
-  }
-}, 1000);
-next1.onclick = () => showSlide('slide2');
+// Slide 1 Countdown + Flame + Happy Birthday Pop
+let count=3;
+const countdown=document.getElementById('countdown');
+const flame=document.getElementById('flame');
+const happyMessage=document.getElementById('happyMessage');
+const slide1=document.getElementById('slide1');
 
-// Confetti function
-function startConfetti(){
-  for(let i=0; i<80; i++){
-    let conf = document.createElement("div");
-    conf.classList.add("confetti");
-    conf.style.left = Math.random()*100 + "vw";
-    conf.style.background = "hsl(" + Math.random()*360 + ",100%,50%)";
-    conf.style.animationDuration = (Math.random()*2+2) + "s";
-    document.body.appendChild(conf);
-    setTimeout(()=>conf.remove(), 3000);
-  }
+const countdownInterval=setInterval(()=>{
+    if(count>1){count--; countdown.innerText=count;}
+    else if(count===1){
+        count--;
+        countdown.innerText="1";
+        setTimeout(()=>{
+            flame.style.display='none';
+            happyMessage.style.display='block';
+        },1000);
+        clearInterval(countdownInterval);
+    }
+},1000);
+
+// Slide 2 Messages
+const messages=[
+"I hope you stay happy","I hope you stay with me","I hope your naseeb is good",
+"I hope you are praying namaz","I hope you are eating healthy","I hope you are waking up early",
+"I hope you are watching less mobile","I hope you are far away from reels","I hope you got the motive for your life",
+"I hope you don't cry anymore","I hope you are strong","I hope you are in shape ",
+"I wish this year would be exciting","Thank you for everything","Allah bless you",
+"I hope you stay adventurous","I hope you smile everyday","I hope you make new memories",
+"I hope you enjoy every moment","I hope you stay lucky","I hope your knees are better","I hope you claim success"
+];
+const messagesContainer=document.getElementById('messagesContainer');
+messages.forEach((msg,index)=>{
+    const div=document.createElement('div');
+    div.className='message-box bold-text';
+    div.innerText=`${index+1}. ${msg}`;
+    messagesContainer.appendChild(div);
+});
+
+// Slide 3 Memory Game
+const cardsData=["🦸‍♂️ Batman","🦸‍♂️ Batman","🎀 Pookie","🎀 Pookie","🫣 Baccha","🫣 Baccha","😚 Aalu","😚 Aalu"];
+cardsData.sort(()=>0.5-Math.random());
+const gameArena=document.getElementById('gameArena');
+let firstCard=null, secondCard=null, matches=0;
+cardsData.forEach(text=>{
+    const card=document.createElement('div');
+    card.className='card';
+    card.dataset.value=text;
+    card.addEventListener('click',()=>{flipCard(card)});
+    gameArena.appendChild(card);
+});
+function flipCard(card){
+    if(card.classList.contains('matched') || card===firstCard) return;
+    card.innerText=card.dataset.value;
+    if(!firstCard) firstCard=card;
+    else{
+        secondCard=card;
+        if(firstCard.dataset.value===secondCard.dataset.value){
+            firstCard.classList.add('matched');
+            secondCard.classList.add('matched');
+            matches++;
+            firstCard=null;
+            secondCard=null;
+        } else {
+            setTimeout(()=>{
+                firstCard.innerText='';
+                secondCard.innerText='';
+                firstCard=null;
+                secondCard=null;
+            },800);
+        }
+    }
+    document.getElementById('score').innerText=`Matches Found: ${matches}`;
 }
 
-// Slide 3: gift game
-function initGame(){
-  const game = document.getElementById("gameArea");
-  const gifts = [
-    {emoji:"🎁", message:"Mera Batman 🦸‍♂️"},
-    {emoji:"🎁", message:"Nalleee 😎"},
-    {emoji:"🎁", message:"Aaaaalooooooo 🍩"},
-    {emoji:"🎁", message:"Happy Birthday Pookie 🎉"},
-    {emoji:"🎁", message:"Heera hai Heeraa 💎"},
-    {emoji:"🎁", message:"Baccha? 🦄"},
-    {emoji:"🎁", message:"Lite lene ka sabko 🍕"},
-    {emoji:"🎁", message:"Sweet but Naughty 🍪"},
-    {emoji:"🎁", message:"Rang birangi zindagi 🌈"}
-  ];
-  const grid = document.createElement('div'); grid.classList.add('grid');
-  game.appendChild(grid);
-
-  let opened = 0;
-  gifts.forEach((item) => {
-    const box = document.createElement('div');
-    box.classList.add('gift');
-    box.textContent = item.emoji;
-    box.onclick = () => {
-      if (box.classList.contains('opened')) return;
-      box.classList.add('opened');
-      const msg = document.createElement('div');
-      msg.classList.add('gift-msg');
-      msg.textContent = item.message;
-      box.appendChild(msg);
-      opened++;
-      // If all gifts are opened, show the next button
-      if (opened === gifts.length) {
-        document.getElementById('next3').style.display='inline-block';
-      }
-    };
-    grid.appendChild(box);
-  });
-}
-initGame();
-document.getElementById('next3').onclick = () => showSlide('slide4');
-
-// Slide 4: choice messages
-function showMessage(option){
-  const msgDiv = document.getElementById('choiceMessage');
-  msgDiv.style.display = 'inline-block';
-  if(option===1){
-    msgDiv.textContent = "Ek to mai, I mean Maseera 💖";
-  } else {
-    msgDiv.textContent = "Fir se maich, Maseera 🎉";
-  }
-  document.getElementById('next4').style.display = 'inline-block';
+// Slide 4 Options
+function showOption(msg){
+    document.getElementById('optionMessage').innerText=msg;
 }
 </script>
 </body>
 </html>
-
